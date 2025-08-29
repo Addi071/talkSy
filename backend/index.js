@@ -12,7 +12,10 @@ dotenv.config();
 
 const PORT = process.env.port
 
-app.use(cors())
+app.use(cors({
+   origin: "https://talk-sy.vercel.app",
+    credentials:true,
+}))
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(cookieParser())
 
