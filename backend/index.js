@@ -12,10 +12,7 @@ dotenv.config();
 
 const PORT = process.env.port
 
-app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-}))
+app.use(cors())
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(cookieParser())
 
