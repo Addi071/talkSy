@@ -13,7 +13,7 @@ dotenv.config();
 const PORT = process.env.port
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: process.env.FRONTEND_URL,
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }))
 app.use(express.json()); // Middleware to parse JSON bodies
@@ -22,7 +22,7 @@ app.use(cookieParser())
 app.use('/api/auth',authRoutes);
 app.use('/api/message',messageRoutes);
 
-server.listen(PORT || 5000 || 5002,()=>{
+server.listen(PORT,()=>{
 
     console.log('Server is running on port '+ PORT);
     connectDB()
