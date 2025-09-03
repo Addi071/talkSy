@@ -15,7 +15,7 @@ const PORT = process.env.PORT
 const __dirname = path.resolve()
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL,
+    origin:"http://localhost:5173",
     credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 }))
 app.use(express.json()); // Middleware to parse JSON bodies
