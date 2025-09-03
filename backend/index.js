@@ -10,7 +10,7 @@ import { app, server } from './lib/socket.js';
 
 dotenv.config();
 
-const PORT = process.env.port
+const PORT = process.env.PORT
 
 app.use(cors({
     origin: process.env.FRONTEND_URL,
