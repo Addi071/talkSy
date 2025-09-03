@@ -1,48 +1,52 @@
-import react, { useEffect } from 'react'
-import { Navbar } from './components/Navbar.jsx'
-import { Routes,Route, Navigate } from 'react-router-dom'
-import { Home } from './pages/Home.jsx'
-import { Signup } from './pages/Signup.jsx'
-import { Login } from './pages/Login.jsx'
-import { Setting } from './pages/Setting.jsx'
-import { Profilepage } from './pages/Profilepage.jsx'
-import { useAuthStore } from './store/useAuthStore.js'
-import { Loader } from 'lucide-react'
-import { Toaster } from 'react-hot-toast'
-import { useThemeStore } from './store/useThemeStore.js'
+import Navbar from "./components/Navbar";
 
-function App() {
- const {authUser,checkAuth, isCheckingAuth, onlineUsers} = useAuthStore()
- const {theme} = useThemeStore()
+import HomePage from "./pages/HomePage";
+import SignUpPage from "./pages/SignUpPage";
+import LoginPage from "./pages/LoginPage";
+import SettingsPage from "./pages/SettingsPage";
+import ProfilePage from "./pages/ProfilePage";
 
- console.log({onlineUsers})
+import { Routes, Route, Navigate } from "react-router-dom";
+import { useAuthStore } from "./store/useAuthStore";
+import { useThemeStore } from "./store/useThemeStore";
+import { useEffect } from "react";
 
- useEffect(()=>{
-    checkAuth()
-  },[checkAuth]);
-  console.log({authUser})
+import { Loader } from "lucide-react";
+import { Toaster } from "react-hot-toast";
 
-  if (isCheckingAuth && !authUser)return(
-    <div className='flex items-center justify-center h-screen'>
-      <Loader className='size-10 animate-spin'/>
-    </div>
-  )
+const App = () => {
+  const { authUser, checkAuth, isCheckingAuth, onlineUsers } = useAuthStore();
+  const { theme } = useThemeStore();
+
+  console.log({ onlineUsers });
+
+  useEffect(() => {
+    checkAuth();
+  }, [checkAuth]);
+
+  console.log({ authUser });
+
+  if (isCheckingAuth && !authUser)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <Loader className="size-10 animate-spin" />
+      </div>
+    );
 
   return (
     <div data-theme={theme}>
-    <Navbar/>
-    <div className="pt-16">
-    <Routes>
-      <Route path="/" element={authUser ? <Home/> : <Navigate to='/login'/>} />
-      <Route path="/signup" element={!authUser ? <Signup/> : <Navigate to='/'/> } />
-      <Route path="/login" element={!authUser ? <Login/> : <Navigate to='/'/>} />
-      <Route path="/setting" element={<Setting/>} />
-      <Route path="/profile" element={authUser ?<Profilepage/> : <Navigate to='/login'/>} />
-    </Routes>
-    <Toaster/>
-    </div>
-    </div>
-  )
-}
+      <Navbar />
 
-export default App
+      <Routes>
+        <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
+        <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+        <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
+        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
+      </Routes>
+
+      <Toaster />
+    </div>
+  );
+};
+export default App;

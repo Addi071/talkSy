@@ -1,6 +1,4 @@
-import React from "react";
-
-export const MessageSkeleton = () => {
+const MessageSkeleton = () => {
   // Create an array of 6 items for skeleton messages
   const skeletonMessages = Array(6).fill(null);
 
@@ -27,3 +25,4 @@ export const MessageSkeleton = () => {
   );
 };
 
+export default MessageSkeleton;

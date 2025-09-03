@@ -1,9 +1,8 @@
 import { X } from "lucide-react";
-import { useAuthStore } from "../store/useAuthStore.js";
-import { useChatStore } from "../store/useChatStore.js";
-import React from "react";
+import { useAuthStore } from "../store/useAuthStore";
+import { useChatStore } from "../store/useChatStore";
 
-export const ChatHeader = () => {
+const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
   const { onlineUsers } = useAuthStore();
 
@@ -20,7 +19,7 @@ export const ChatHeader = () => {
 
           {/* User info */}
           <div>
-            <h3 className="font-medium">{selectedUser.name}</h3>
+            <h3 className="font-medium">{selectedUser.fullName}</h3>
             <p className="text-sm text-base-content/70">
               {onlineUsers.includes(selectedUser._id) ? "Online" : "Offline"}
             </p>
@@ -35,3 +34,4 @@ export const ChatHeader = () => {
     </div>
   );
 };
+export default ChatHeader;
